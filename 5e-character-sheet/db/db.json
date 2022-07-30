@@ -1,0 +1,18 @@
+{
+  "spells": [
+    {
+      "name": "Absorb Elements",
+      "level": "1st",
+      "castingTime": "1 Reaction",
+      "range": "Self",
+      "components": "S",
+      "duration": "1 Round",
+      "school": "Abjuration",
+      "save": "None",
+      "damage": "Acid, cold, fire, lightning, or thunder",
+      "description": "The spell captures some of the incoming energy, lessening its effect on you and storing it for your next melee attack. You have resistance to the triggering damage type until the start of your next turn. Also, the first time you hit with a melee attack on your next turn, the target takes an extra 1d6 damage of the triggering type, and the spell ends.",
+      "higherLvls": "When you cast this spell using a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each slot level above 1st.",
+      "id": 1
+    }
+  ]
+}

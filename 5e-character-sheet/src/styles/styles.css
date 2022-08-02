@@ -193,12 +193,44 @@ h2 {
 
 /* VIEW SECTION */
 
+.spell__card {
+    display: grid;
+    grid-template-columns: 800px 1fr;
+    gap: 20px;
+}
+
 .spell__view {
     max-width: 800px;
 }
 
 .spell__detail {
     padding: 10px 0px 10px 0px;
+}
+
+.button__view {
+    border: var(--clrText) solid 2px;
+    background-color: var(--clrMain);
+    color: var(--clrText);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 10px;
+}
+
+.button__view:hover {
+    background-color: var(--clrText);
+    color: var(--clrMain);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.output {
+    display: inline;
+    border: var(--clrText) solid 2px;
+    background-color: var(--clrMain);
+    color: var(--clrText);
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 10px 10px;
 }
 
 .view-section {
@@ -249,9 +281,9 @@ h2 {
     gap: 0.5rem;
 }
 
-.spell-card h2 {
+/* .spell-card h2 {
     font-size: 1.15rem;
-}
+} */
 
 .textarea {
     color: var(--clrMain);

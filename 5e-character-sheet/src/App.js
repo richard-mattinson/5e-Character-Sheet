@@ -8,7 +8,9 @@ import "./styles/styles.css";
 
 export default function App() {
   const [spells, setSpells] = useState([]);
-  const [spellSlots, setSpellSlots] = useState([]);
+  const [spellSlots, setSpellSlots] = useState({
+    First: 2
+  });
 
   console.log("State Spells", spells);
 

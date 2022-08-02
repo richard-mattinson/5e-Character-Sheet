@@ -31,7 +31,7 @@
     },
     {
       "name": "Thunderwave",
-      "level": "1st",
+      "lvl": "1st",
       "castingTime": "1 Action",
       "range": "Self (15ft cube)",
       "duration": "Instantaneous",

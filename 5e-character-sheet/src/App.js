@@ -8,6 +8,8 @@ import "./styles/styles.css";
 
 export default function App() {
   const [spells, setSpells] = useState([]);
+  const [spellSlots, setSpellSlots] = useState([]);
+
   console.log("State Spells", spells);
 
   useEffect(() => {
@@ -18,40 +20,34 @@ export default function App() {
         setSpells(data);
       });
   }, []);
-
+  
   return (
     <>
       <nav>
-        <h2>Menu</h2>
-        <ul>
-          <Link to="/">
-            <li>Spell List</li>
-          </Link>
-          <Link to="/spells/add">
-            <li>Add New Spell</li>
-          </Link>
-        </ul>
+        {/* <h2>Menu</h2> */}
+        <div className="main__menu">
+          <ul>
+            <Link to="/">
+              <li>Spell List</li>
+            </Link>
+            <Link to="/spells/add">
+              <li>Add New Spell</li>
+            </Link>
+          </ul>
+        </div>
       </nav>
       <main>
-        {/* DONE: Add routes here  */}
         <Routes>
           <Route path="/" element={<SpellList spells={spells} />} />
-          <Route
-            path="/spells"
-            element={<SpellList spells={spells} />}
-          />
+          <Route path="/spells" element={<SpellList spells={spells} />} />
           <Route
             path="/spells/add"
-            element={
-              <SpellAdd spells={spells} setSpells={setSpells} />
-            }
+            element={<SpellAdd spells={spells} setSpells={setSpells} />}
           />
           <Route path="/spells/:id" element={<SpellView />} />
           <Route
             path="/spells/:id/:edit"
-            element={
-              <SpellEdit spells={spells} setSpells={setSpells} />
-            }
+            element={<SpellEdit spells={spells} setSpells={setSpells} />}
           />
         </Routes>
       </main>

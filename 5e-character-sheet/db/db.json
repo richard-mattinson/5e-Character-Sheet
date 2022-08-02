@@ -13,6 +13,37 @@
       "description": "The spell captures some of the incoming energy, lessening its effect on you and storing it for your next melee attack. You have resistance to the triggering damage type until the start of your next turn. Also, the first time you hit with a melee attack on your next turn, the target takes an extra 1d6 damage of the triggering type, and the spell ends.",
       "higherLvls": "When you cast this spell using a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each slot level above 1st.",
       "id": 1
+    },
+    {
+      "name": "Detect Magic",
+      "level": "1st",
+      "castingTime": "1 Action",
+      "range": "Self (30ft radius)",
+      "duration": "10 Minutes",
+      "school": "Divination",
+      "save": "n/a",
+      "damage": "n/a",
+      "concentration": "Concentration",
+      "ritual": "Ritual",
+      "description": "For the duration, you sense the presence of magic within 30 feet of you. If you sense magic in this way, you can use your action to see a faint aura around any visible creature or object in the area that bears magic, and you learn its school of magic, if any.\n\nThe spell can penetrate most barriers, but it is blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood or dirt.",
+      "higherLvls": "n/a",
+      "id": 2
+    },
+    {
+      "name": "Thunderwave",
+      "level": "1st",
+      "castingTime": "1 Action",
+      "range": "Self (15ft cube)",
+      "duration": "Instantaneous",
+      "school": "Evocation",
+      "save": "CON Save",
+      "damage": "Thunder",
+      "damageDice": "d8",
+      "concentration": "",
+      "ritual": "",
+      "description": "A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a Constitution saving throw. On a failed save, a creature takes 2d8 thunder damage and is pushed 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed.\n\nIn addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell's effect, and the spell emits a thunderous boom audible out to 300 feet.",
+      "higherLvls": "When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.",
+      "id": 3
     }
   ]
 }

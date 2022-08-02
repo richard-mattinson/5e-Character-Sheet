@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SpellList(props) {
-  console.log("SL Props", props);
+  // console.log("SL Props", props);
 
   const { spells } = props;
 
@@ -13,16 +12,24 @@ function SpellList(props) {
       </header>
       <ul className="spells-list">
         {spells.map((spell, index) => {
-          const { level, name, castingTime } = spell;
+          const { level, name } = spell;
           return (
             <li className="spell" key={index}>
               <p>
-                {level} <b>{name}</b> {castingTime}
+                {level} <b>{name}</b>
               </p>
-              <p>
-                <Link to={`/spells/${spell.id}`}>View |</Link>
-                <Link to={`/spells/${spell.id}/edit`}>| Edit</Link>
-              </p>
+              <div className="spells-list-links">
+                <ul>
+                  <li>
+                    <Link to={`/spells/${spell.id}`}>View</Link>
+                  </li>
+                  <li>
+                    <Link to={`/spells/${spell.id}/edit`}>Edit</Link>
+                  </li>
+                  <li>
+                  </li>
+                </ul>
+              </div>
             </li>
           );
         })}

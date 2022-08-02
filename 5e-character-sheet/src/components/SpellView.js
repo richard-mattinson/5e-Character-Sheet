@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 
 function SpellView() {
   const [spell, setSpell] = useState(false);
+  const [dice, setDice] = useState([]);
+  console.log("Dice", dice);
 
   const { id } = useParams();
   console.log("What Params?", useParams());
@@ -16,31 +18,64 @@ function SpellView() {
       });
   }, [id]);
 
+  if (spell.higherLvls === null) {
+    spell.higherLvls = "n/a"
+  }
+
   if (!spell) {
     return <p>Checking the scroll library</p>;
   }
 
+const diceBag = {
+  d4: [1, 2, 3, 4],
+  d6: [1, 2, 3, 4, 5, 6],
+  d8: [1, 2, 3, 4, 5, 6, 7, 8],
+  d10: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  d12: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  d20: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+};
+
+    function rollDice(value) {
+      const roll = value[Math.floor(Math.random() * value.length)];
+      // console.log("Dice", rollDice);
+      setDice(roll);
+    }
+
   return (
-    <div>
-      <h2>
-        {spell.name}
-      </h2>
-      <p>
+    <div className="spell__view">
+      <h2>{spell.name}</h2>
+      <p className="spell__detail">
         {spell.level} level, {spell.school}
       </p>
       <hr />
-      <p>
-        <b>Casting Time: </b>{spell.castingTime}, 
-        <b>Range: </b>{spell.range}
-      </p>
+      <div className="spell__detail">
+        <ul>
+          <li>
+            <b>Casting Time: </b>
+            {spell.castingTime}
+          </li>
+          <li>
+            <b>Range: </b>
+            {spell.range}
+          </li>
+        </ul>
+      </div>
       <hr />
-      <p>
+      <p className="spell__detail">
         <b>Description:</b> {spell.description}
       </p>
       <hr />
-      <p>
+      <p className="spell__detail">
         <b>At Higher Levels: </b> {spell.higherLvls}
       </p>
+      Damage - <button
+        onClick={() => {
+          rollDice(diceBag[spell.damageDice]);
+        }}
+      >
+       roll {spell.damageDice}
+      </button>
+      - {dice}
     </div>
   );
 }

@@ -44,5 +44,7 @@ Attempting to bring together JS, React, HTML and CSS. Practicing methods includi
 #### To start a local server
 - npm install json-server
 - npx json-server -p 4000 db/db.json --watch
+#### To use Toastify for custom pop-ups
+- npm install --save react-toastify
 
 

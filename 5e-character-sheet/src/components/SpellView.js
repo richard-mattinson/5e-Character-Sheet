@@ -5,17 +5,20 @@ function SpellView() {
   const [spell, setSpell] = useState(false);
   const [dice, setDice] = useState([]);
   const [spellSlotFirst, setSpellSlotFirst] = useState(2);
+  const [spellSlotSecond, setSpellSlotSecond] = useState(0);
+  // TODO: spell slots should be a single array [2, 0] to be indexed in to
+
   console.log("Dice", dice);
   console.log("Slots", spellSlotFirst);
 
   const { id } = useParams();
-  console.log("What Params?", useParams());
+  // console.log("What Params?", useParams());
 
   useEffect(() => {
     fetch(`http://localhost:4000/spells/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("View Spell API", data);
+        // console.log("View Spell API", data);
         setSpell(data);
       });
   }, [id]);
@@ -39,13 +42,17 @@ function SpellView() {
     ],
   };
 
+  // TODO: use indexing to select the right spell slot?
   function cast(value) {
     console.log("Value", value);
-    let availableSlots = spellSlotFirst
-    if(availableSlots === 0)
-      alert(`You're out of ${spell.lvl} level slots, adventurer!`)
-    availableSlots--
-    setSpellSlotFirst(availableSlots)
+    let availableSlots = spellSlotFirst;
+    if (availableSlots === 0) {
+      alert(`You're out of ${value} level slots, adventurer!`);
+      setSpellSlotFirst(0);
+    } else {
+      availableSlots--;
+      setSpellSlotFirst(availableSlots);
+    }
   }
 
   function rollDice(value) {
@@ -83,19 +90,29 @@ function SpellView() {
           <b>At Higher Levels: </b> {spell.higherLvls}
         </p>
       </div>
+
       <div className="spell__casting">
         <div className="spell__cast">
-          CAST 
-          <button 
+          <h3>Cast at</h3>
+          <button
             className="button__view"
-            onClick={() =>{
-              cast(spellSlotFirst[spell.lvl])
-            }}>
-              {spell.name}!
-            </button>
+            onClick={() => {
+              cast("1st");
+            }}
+          >
+            1st
+          </button>
+          <button
+            className="button__view"
+            onClick={() => {
+              cast("2nd");
+            }}
+          >
+            2st
+          </button>
         </div>
         <div className="spell__damage">
-          Damage
+          <h3>Damage</h3>
           <button
             className="button__view"
             onClick={() => {
@@ -105,6 +122,18 @@ function SpellView() {
             roll {spell.damageDice}
           </button>
           <div className="output">{dice}</div>
+        </div>
+      </div>
+
+      <div className="spell__slots">
+        <h3>Spell Slots</h3>
+        <div className="spell__slot">
+          <div className="output">{spellSlotFirst}</div>
+          1st
+        </div>
+        <div className="spell__slot">
+          <div className="output">{spellSlotSecond}</div>
+          2nd
         </div>
       </div>
     </div>

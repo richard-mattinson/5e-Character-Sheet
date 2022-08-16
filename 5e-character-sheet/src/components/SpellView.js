@@ -4,14 +4,26 @@ import { useParams } from "react-router-dom";
 function SpellView() {
   const [spell, setSpell] = useState(false);
   const [dice, setDice] = useState([]);
-  const [spellSlotFirst, setSpellSlotFirst] = useState(2);
-  const [spellSlotSecond, setSpellSlotSecond] = useState(0);
-  // TODO: spell slots should be a single array [2, 0] to be indexed in to
-
-  console.log("Dice", dice);
-  console.log("Slots", spellSlotFirst);
-
   const { id } = useParams();
+  const defaultSlots = {
+      slot1: 2,
+      slot2: 0
+    }
+  const [spellSlots, setSpellSlots] = useState(
+    JSON.parse(localStorage.getItem("spellSlots")) || 
+    {...defaultSlots}
+  );
+  const diceBag = {
+    d4: [1, 2, 3, 4],
+    d6: [1, 2, 3, 4, 5, 6],
+    d8: [1, 2, 3, 4, 5, 6, 7, 8],
+    d10: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    d12: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    d20: [
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    ],
+  };
+
   // console.log("What Params?", useParams());
 
   useEffect(() => {
@@ -31,29 +43,19 @@ function SpellView() {
     return <p>Checking the scroll library</p>;
   }
 
-  const diceBag = {
-    d4: [1, 2, 3, 4],
-    d6: [1, 2, 3, 4, 5, 6],
-    d8: [1, 2, 3, 4, 5, 6, 7, 8],
-    d10: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    d12: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    d20: [
-      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    ],
-  };
-
-  // TODO: use indexing to select the right spell slot?
-  function cast(value) {
-    console.log("Value", value);
-    let availableSlots = spellSlotFirst;
-    if (availableSlots === 0) {
-      alert(`You're out of ${value} level slots, adventurer!`);
-      setSpellSlotFirst(0);
+  function cast(slotName) {
+    if (spellSlots[slotName] > 0) {
+      const updatedSpellSlots = {...spellSlots}
+      updatedSpellSlots[slotName]--;
+      setSpellSlots(updatedSpellSlots)
+      localStorage.setItem("spellSlots", JSON.stringify(updatedSpellSlots));
     } else {
-      availableSlots--;
-      setSpellSlotFirst(availableSlots);
+      alert(`You're out of ${slotName} level slots, adventurer!`);
     }
   }
+
+  // TODO: make this loop to roll multiple dice?
+  // TODO: have the spell level effect number of dice rolled with a switch?
 
   function rollDice(value) {
     const roll = value[Math.floor(Math.random() * value.length)];
@@ -91,26 +93,30 @@ function SpellView() {
         </p>
       </div>
 
+      {/* TODO: Only display buttons if spell slot is available? Use if/forEach (51.21 Net Ninja JS6) or Conditional Rendering?*/}
       <div className="spell__casting">
         <div className="spell__cast">
           <h3>Cast at</h3>
+
           <button
             className="button__view"
             onClick={() => {
-              cast("1st");
+              cast("slot1");
             }}
           >
             1st
           </button>
+
           <button
             className="button__view"
             onClick={() => {
-              cast("2nd");
+              cast("slot2");
             }}
           >
-            2st
+            2nd
           </button>
         </div>
+
         <div className="spell__damage">
           <h3>Damage</h3>
           <button
@@ -123,16 +129,28 @@ function SpellView() {
           </button>
           <div className="output">{dice}</div>
         </div>
+
+        <div>
+          <h3>Long Rest</h3>
+          <button
+          className="button__view"
+          onClick={() => {
+            setSpellSlots({...defaultSlots});
+            localStorage.setItem(spellSlots)
+          }}>
+            Take Rest
+          </button>
+        </div>
       </div>
 
       <div className="spell__slots">
         <h3>Spell Slots</h3>
         <div className="spell__slot">
-          <div className="output">{spellSlotFirst}</div>
+          <div className="output">{spellSlots.slot1}</div>
           1st
         </div>
         <div className="spell__slot">
-          <div className="output">{spellSlotSecond}</div>
+          <div className="output">{spellSlots.slot2}</div>
           2nd
         </div>
       </div>

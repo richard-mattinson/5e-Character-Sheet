@@ -8,9 +8,6 @@ import "./styles/styles.css";
 
 export default function App() {
   const [spells, setSpells] = useState([]);
-  const [spellSlots, setSpellSlots] = useState({
-    First: 2
-  });
 
   console.log("State Spells", spells);
 
@@ -40,17 +37,23 @@ export default function App() {
       </nav>
       <main>
         <Routes>
-          <Route path="/" element={<SpellList spells={spells} />} />
-          <Route path="/spells" element={<SpellList spells={spells} />} />
+          <Route path="/" 
+            element={<SpellList 
+            spells={spells} />} />
+          <Route 
+            path="/spells" 
+            element={<SpellList spells={spells} />} />
           <Route
             path="/spells/add"
             element={<SpellAdd spells={spells} setSpells={setSpells} />}
           />
-          <Route path="/spells/:id" element={<SpellView />} />
-          <Route
+          <Route 
+            path="/spells/:id" 
+            element={<SpellView spells={spells} setSpells={setSpells}/>} />
+          {/* <Route
             path="/spells/:id/:edit"
             element={<SpellEdit spells={spells} setSpells={setSpells} />}
-          />
+          /> */}
         </Routes>
       </main>
     </>

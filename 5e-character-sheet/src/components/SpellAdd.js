@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SpellsAdd(props) {
   // console.log("Add Props", props);
 
+  const ref = useRef()
+  // const regEx = /^a-zA-Z$/;
   const { spells, setSpells } = props;
+  const navigate = useNavigate();
   const [newSpell, setNewSpell] = useState({
     name: "",
     level: "",
@@ -20,9 +23,30 @@ function SpellsAdd(props) {
     ritual: "", 
     description: "",
     higherLvls: ""
-
   });
-  const navigate = useNavigate();
+  // const validate = (values) => { // could this be part of handleChange?
+  //   const errors = {
+  //     name: ""
+  //   };
+  //   // const regexp =
+  //   //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{4,12}$/;
+  //   const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+  //   if (!values.name) {
+  //     errors.email = "Email is required!";
+  //   } else if (!pattern.test(values.name)) {
+  //     errors.email = "This is not Valid email format";
+  //   }
+  //   return errors;
+  // };
+
+  // function nameChecker(value) {
+  //   console.log(value);
+  //   if(regEx.test(value)){
+  //     console.log('passed');
+  //   } else{
+  //     console.log('failed');
+  //   }
+  // }
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -59,12 +83,16 @@ function SpellsAdd(props) {
     <form className="form-stack spell-form" onSubmit={handleSubmit}>
       <h2>Create Spell</h2>
 
+      {/* TODO: Use useRef as a querySelector to display an error if none alphanumeric characters are entered */}
       <label htmlFor="name">Name:</label>
       <input
         id="name"
         name="name"
         type="text"
+        ref={ref}
         required
+        // className={`${errors.name}` ? 'error-control' : 'form-control'}
+        // placeholder={`${errors.name}` ? `${errors.name}` : "Spell Name"}
         value={newSpell.name}
         onChange={handleChange}
       />
@@ -249,7 +277,12 @@ function SpellsAdd(props) {
       </select>
 
       <label htmlFor="damageDice">Damage Dice:</label>
-      <select id="damageDice" name="damageDice" required onChange={handleChange}>
+      <select
+        id="damageDice"
+        name="damageDice"
+        required
+        onChange={handleChange}
+      >
         <option value="default" selected disabled>
           Please select
         </option>
@@ -323,6 +356,7 @@ function SpellsAdd(props) {
       ></textarea>
 
       <div className="actions-section">
+        {/* TODO: Make this button reset the form! */}
         <button className="button__form" type="reset">
           Reset
         </button>

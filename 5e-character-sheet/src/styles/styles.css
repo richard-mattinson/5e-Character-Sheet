@@ -80,7 +80,7 @@ body {
     color: var(--clrText)
 }
 
-/* APP PAGE */
+/* -------- APP PAGE -------- */
 nav {
     position: fixed;
     width: 100%;
@@ -191,7 +191,7 @@ h2 {
     gap: 1rem;
 }
 
-/* VIEW SECTION */
+/* --------  VIEW SECTION -------- */
 
 .spell__card {
     display: grid;
@@ -247,6 +247,8 @@ h2 {
     padding: 2rem 0;
 }
 
+/* -------- ADD PAGE -------- */
+
 .form-stack>*+* {
     margin-top: 0.5rem;
 }
@@ -261,6 +263,14 @@ h2 {
 
 .spell-form {
     max-width: 400px;
+}
+
+.form-control {
+    border: 1px solid black
+}
+
+.error-control {
+    border: 1px solid red
 }
 
 /* .spell-input {

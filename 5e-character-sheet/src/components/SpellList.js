@@ -4,6 +4,8 @@ function SpellList(props) {
   // console.log("SL Props", props);
 
   const { spells } = props;
+  spells.sort(); // TODO: make this sort spells in alphabetical order
+
 
   return (
     <>
